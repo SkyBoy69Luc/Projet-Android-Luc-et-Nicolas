@@ -62,8 +62,8 @@ public class Tom2 extends View {
 
     public void drawBitmap(Canvas canvas) {
         canvas.save();
-        canvas.scale(0.8f,0.8f);
-        canvas.drawBitmap(tom2Image, 500, 300, null);
+        canvas.scale(0.2f,0.2f);
+        canvas.drawBitmap(tom2Image, 1250, 500, null);
         canvas.restore();
     }
 

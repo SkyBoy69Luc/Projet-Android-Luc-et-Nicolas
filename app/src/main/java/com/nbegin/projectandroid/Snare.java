@@ -50,9 +50,7 @@ public class Snare extends View {
         }
         return true;
     }
-    private void playMediaPlayer(){
-        snareSound.start();
-    }
+    private void playMediaPlayer(){ snareSound.start(); }
 
     @Override
     protected void onDraw(Canvas canvas){
@@ -62,8 +60,8 @@ public class Snare extends View {
 
     public void drawBitmap(Canvas canvas) {
         canvas.save();
-        canvas.scale(0.8f,0.8f);
-        canvas.drawBitmap(snareImage, 500, 500, null);
+        canvas.scale(0.1f,0.1f);
+        canvas.drawBitmap(snareImage, 250, 700, null);
         canvas.restore();
     }
 

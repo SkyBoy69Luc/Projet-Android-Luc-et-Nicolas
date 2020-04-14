@@ -62,8 +62,8 @@ public class Basedrum extends View {
 
     public void drawBitmap(Canvas canvas) {
         canvas.save();
-        canvas.scale(0.8f,0.8f);
-        canvas.drawBitmap(baseDrumImage, 700, 700, null);
+        canvas.scale(0.6f,0.6f);
+        canvas.drawBitmap(baseDrumImage, 950, 700, null);
         canvas.restore();
     }
 

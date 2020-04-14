@@ -62,7 +62,7 @@ public class Hihat extends View {
 
     public void drawBitmap(Canvas canvas) {
         canvas.save();
-        canvas.scale(0.17f,0.17f);
+        canvas.scale(0.15f,0.15f);
         canvas.drawBitmap(hihatImage, 0, 500, null);
         canvas.restore();
     }
