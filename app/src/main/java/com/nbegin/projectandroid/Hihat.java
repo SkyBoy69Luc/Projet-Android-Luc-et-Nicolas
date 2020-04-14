@@ -12,22 +12,22 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-public class Basedrum extends View {
+public class Hihat extends View {
 
-    private Bitmap baseDrumImage;
-    private MediaPlayer baseDrumSound;
+    private Bitmap hihatImage;
+    private MediaPlayer hihatSound;
     private ScaleGestureDetector mScaleDetector;
 
-    public Basedrum(Context context) {
+    public Hihat(Context context) {
         super(context);
     }
 
-    public Basedrum(Context context, @Nullable AttributeSet attrs){
+    public Hihat(Context context, @Nullable AttributeSet attrs){
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
-        baseDrumImage = BitmapFactory.decodeResource(getResources(), R.raw.basedrum2);
-        baseDrumSound = MediaPlayer.create(context, R.raw.bassdrum);
-        baseDrumSound.setLooping(false);
+        hihatImage = BitmapFactory.decodeResource(getResources(), R.raw.hihat);
+        hihatSound = MediaPlayer.create(context, R.raw.hihat1);
+        hihatSound.setLooping(false);
 
     }
 
@@ -51,7 +51,7 @@ public class Basedrum extends View {
         return true;
     }
     private void playMediaPlayer(){
-            baseDrumSound.start();
+        hihatSound.start();
     }
 
     @Override
@@ -62,8 +62,8 @@ public class Basedrum extends View {
 
     public void drawBitmap(Canvas canvas) {
         canvas.save();
-        canvas.scale(0.8f,0.8f);
-        canvas.drawBitmap(baseDrumImage, 700, 700, null);
+        canvas.scale(0.17f,0.17f);
+        canvas.drawBitmap(hihatImage, 0, 500, null);
         canvas.restore();
     }
 

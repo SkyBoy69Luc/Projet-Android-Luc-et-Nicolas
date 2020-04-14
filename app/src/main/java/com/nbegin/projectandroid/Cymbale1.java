@@ -12,22 +12,22 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-public class Basedrum extends View {
+public class Cymbale1 extends View {
 
-    private Bitmap baseDrumImage;
-    private MediaPlayer baseDrumSound;
+    private Bitmap cymbale1Image;
+    private MediaPlayer cymbale1Sound;
     private ScaleGestureDetector mScaleDetector;
 
-    public Basedrum(Context context) {
+    public Cymbale1(Context context) {
         super(context);
     }
 
-    public Basedrum(Context context, @Nullable AttributeSet attrs){
+    public Cymbale1(Context context, @Nullable AttributeSet attrs){
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
-        baseDrumImage = BitmapFactory.decodeResource(getResources(), R.raw.basedrum2);
-        baseDrumSound = MediaPlayer.create(context, R.raw.bassdrum);
-        baseDrumSound.setLooping(false);
+        cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.crash);
+        cymbale1Sound = MediaPlayer.create(context, R.raw.cymbal1);
+        cymbale1Sound.setLooping(false);
 
     }
 
@@ -51,7 +51,7 @@ public class Basedrum extends View {
         return true;
     }
     private void playMediaPlayer(){
-            baseDrumSound.start();
+        cymbale1Sound.start();
     }
 
     @Override
@@ -62,8 +62,8 @@ public class Basedrum extends View {
 
     public void drawBitmap(Canvas canvas) {
         canvas.save();
-        canvas.scale(0.8f,0.8f);
-        canvas.drawBitmap(baseDrumImage, 700, 700, null);
+        canvas.scale(0.2f,0.2f);
+        canvas.drawBitmap(cymbale1Image, 900, 200, null);
         canvas.restore();
     }
 
