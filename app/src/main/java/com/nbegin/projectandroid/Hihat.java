@@ -63,8 +63,13 @@ public class Hihat extends View {
     public void drawBitmap(Canvas canvas) {
         canvas.save();
         canvas.scale(0.15f,0.15f);
-        canvas.drawBitmap(hihatImage, 0, 500, null);
+        canvas.drawBitmap(hihatImage, 0, 0, null);
         canvas.restore();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(250, 300);
     }
 
 

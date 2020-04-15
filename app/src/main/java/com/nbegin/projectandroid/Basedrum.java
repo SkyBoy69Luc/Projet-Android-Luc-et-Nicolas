@@ -26,6 +26,7 @@ public class Basedrum extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         baseDrumImage = BitmapFactory.decodeResource(getResources(), R.raw.basedrum2);
+        baseDrumSound = new MediaPlayer();
         baseDrumSound = MediaPlayer.create(context, R.raw.bassdrum);
         baseDrumSound.setLooping(false);
 
@@ -63,11 +64,14 @@ public class Basedrum extends View {
     public void drawBitmap(Canvas canvas) {
         canvas.save();
         canvas.scale(0.6f,0.6f);
-        canvas.drawBitmap(baseDrumImage, 950, 700, null);
+        canvas.drawBitmap(baseDrumImage, 0, 0, null);
         canvas.restore();
     }
 
-
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(400, 400);
+    }
 
 
 

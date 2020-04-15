@@ -63,11 +63,14 @@ public class Cymbale1 extends View {
     public void drawBitmap(Canvas canvas) {
         canvas.save();
         canvas.scale(0.2f,0.2f);
-        canvas.drawBitmap(cymbale1Image, 2900, 200, null);
+        canvas.drawBitmap(cymbale1Image, 0, 0, null);
         canvas.restore();
     }
 
-
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(200, 200);
+    }
 
 
 

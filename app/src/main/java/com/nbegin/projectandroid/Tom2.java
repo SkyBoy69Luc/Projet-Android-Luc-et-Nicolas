@@ -63,8 +63,13 @@ public class Tom2 extends View {
     public void drawBitmap(Canvas canvas) {
         canvas.save();
         canvas.scale(0.2f,0.2f);
-        canvas.drawBitmap(tom2Image, 1250, 500, null);
+        canvas.drawBitmap(tom2Image, 0, 0, null);
         canvas.restore();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(250, 300);
     }
 
 }

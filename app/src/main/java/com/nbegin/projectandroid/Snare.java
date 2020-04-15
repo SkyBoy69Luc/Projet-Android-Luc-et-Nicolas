@@ -61,8 +61,13 @@ public class Snare extends View {
     public void drawBitmap(Canvas canvas) {
         canvas.save();
         canvas.scale(0.1f,0.1f);
-        canvas.drawBitmap(snareImage, 250, 700, null);
+        canvas.drawBitmap(snareImage, 0, 0, null);
         canvas.restore();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(275, 275);
     }
 
 }
