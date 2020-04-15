@@ -69,7 +69,7 @@ public class Hihat extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(250, 300);
+        setMeasuredDimension(375, 250);
     }
 
 

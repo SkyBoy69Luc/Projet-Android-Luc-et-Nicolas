@@ -69,7 +69,7 @@ public class Cymbale1 extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(200, 200);
+        setMeasuredDimension(250, 250);
     }
 
 

@@ -70,7 +70,7 @@ public class Basedrum extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(400, 400);
+        setMeasuredDimension(500, 450);
     }
 
 
