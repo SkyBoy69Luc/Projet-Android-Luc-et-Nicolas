@@ -25,8 +25,8 @@ public class Tom2 extends View {
     public Tom2(Context context, @Nullable AttributeSet attrs){
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
-        tom2Image = BitmapFactory.decodeResource(getResources(), R.raw.tom);
-        tom2Sound = MediaPlayer.create(context, R.raw.tom2);
+        tom2Image = BitmapFactory.decodeResource(getResources(), R.raw.tomimage);
+        tom2Sound = MediaPlayer.create(context, R.raw.tomsound2);
         tom2Sound.setLooping(false);
 
     }

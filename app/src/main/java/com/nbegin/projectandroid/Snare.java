@@ -25,8 +25,8 @@ public class Snare extends View {
     public Snare(Context context, @Nullable AttributeSet attrs){
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
-        snareImage = BitmapFactory.decodeResource(getResources(), R.raw.snaire2);
-        snareSound = MediaPlayer.create(context, R.raw.snare);
+        snareImage = BitmapFactory.decodeResource(getResources(), R.raw.snareimage);
+        snareSound = MediaPlayer.create(context, R.raw.snaresound);
         snareSound.setLooping(false);
 
     }

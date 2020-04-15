@@ -25,8 +25,8 @@ public class Hihat extends View {
     public Hihat(Context context, @Nullable AttributeSet attrs){
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
-        hihatImage = BitmapFactory.decodeResource(getResources(), R.raw.hihat);
-        hihatSound = MediaPlayer.create(context, R.raw.hihat1);
+        hihatImage = BitmapFactory.decodeResource(getResources(), R.raw.hihatimage);
+        hihatSound = MediaPlayer.create(context, R.raw.hihatsound1);
         hihatSound.setLooping(false);
 
     }

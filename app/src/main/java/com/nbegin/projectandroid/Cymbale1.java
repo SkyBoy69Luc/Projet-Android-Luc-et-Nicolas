@@ -25,8 +25,8 @@ public class Cymbale1 extends View {
     public Cymbale1(Context context, @Nullable AttributeSet attrs){
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
-        cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.crash);
-        cymbale1Sound = MediaPlayer.create(context, R.raw.cymbal1);
+        cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
+        cymbale1Sound = MediaPlayer.create(context, R.raw.cymbalsound1);
         cymbale1Sound.setLooping(false);
 
     }
