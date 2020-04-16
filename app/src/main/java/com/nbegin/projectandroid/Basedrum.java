@@ -26,7 +26,6 @@ public class Basedrum extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         baseDrumImage = BitmapFactory.decodeResource(getResources(), R.raw.basedrumimage);
-        baseDrumSound = new MediaPlayer();
         baseDrumSound = MediaPlayer.create(context, R.raw.bassdrumsound);
         baseDrumSound.setLooping(false);
 

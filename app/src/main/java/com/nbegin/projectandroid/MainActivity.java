@@ -17,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        InitialiseClass();
+
+    }
+
+    private void InitialiseClass() {
         basedrum = findViewById(R.id.bassedrum1);
         cymbale = findViewById(R.id.cymbale1);
         hihat = findViewById(R.id.hihat);
@@ -24,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
         tom1 = findViewById(R.id.tom1);
         tom2 = findViewById(R.id.tom2);
     }
-
-
-
 
 
 }

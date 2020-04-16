@@ -9,13 +9,16 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 public class Cymbale1 extends View {
 
     private Bitmap cymbale1Image;
     private MediaPlayer cymbale1Sound;
+    private MediaPlayer cymbale2Sound;
     private ScaleGestureDetector mScaleDetector;
 
     public Cymbale1(Context context) {
@@ -28,7 +31,8 @@ public class Cymbale1 extends View {
         cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
         cymbale1Sound = MediaPlayer.create(context, R.raw.cymbalsound1);
         cymbale1Sound.setLooping(false);
-
+        cymbale2Sound = MediaPlayer.create(context, R.raw.floortom1);
+        cymbale2Sound.setLooping(false);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -38,6 +42,7 @@ public class Cymbale1 extends View {
             return true;
         }
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         mScaleDetector.onTouchEvent(event);
@@ -46,6 +51,7 @@ public class Cymbale1 extends View {
                 playMediaPlayer();
                 break;
             case MotionEvent.ACTION_MOVE:
+                cymbale2Sound.start();
                 break;
         }
         return true;
@@ -71,8 +77,5 @@ public class Cymbale1 extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         setMeasuredDimension(250, 250);
     }
-
-
-
 
 }
