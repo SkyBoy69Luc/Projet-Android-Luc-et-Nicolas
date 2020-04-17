@@ -45,10 +45,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.76"
+            app:layout_constraintHorizontal_bias="0.82"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.227" />
+            app:layout_constraintVertical_bias="0.244" />
 
         <com.nbegin.projectandroid.Tom1
             android:id="@+id/tom1"
@@ -56,10 +56,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.272"
+            app:layout_constraintHorizontal_bias="0.524"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.252" />
+            app:layout_constraintVertical_bias="0.244" />
 
         <com.nbegin.projectandroid.Cymbale1
             android:id="@+id/cymbale1"
@@ -67,10 +67,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.479"
+            app:layout_constraintHorizontal_bias="0.179"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.066" />
+            app:layout_constraintVertical_bias="0.091" />
 
         <com.nbegin.projectandroid.Hihat
             android:id="@+id/hihat"

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -15,8 +17,11 @@ import androidx.annotation.Nullable;
 public class Tom2 extends View {
 
     private Bitmap tom2Image;
-    private MediaPlayer tom2Sound;
+    //private MediaPlayer tom2Sound;
     private ScaleGestureDetector mScaleDetector;
+
+    public SoundPool soundPool;
+    private int sound;
 
     public Tom2(Context context) {
         super(context);
@@ -26,8 +31,18 @@ public class Tom2 extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         tom2Image = BitmapFactory.decodeResource(getResources(), R.raw.tomimage);
-        tom2Sound = MediaPlayer.create(context, R.raw.tomsound2);
-        tom2Sound.setLooping(false);
+        //tom2Sound = MediaPlayer.create(context, R.raw.tomsound2);
+        //tom2Sound.setLooping(false);
+
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+        sound = soundPool.load(context, R.raw.tomsound1, 1);
 
     }
 
@@ -51,9 +66,8 @@ public class Tom2 extends View {
         return true;
     }
     private void playMediaPlayer(){
-        tom2Sound.start();
+        soundPool.play(sound, 1, 1, 0, 0, 1);
     }
-
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);

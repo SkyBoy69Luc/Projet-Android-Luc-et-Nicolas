@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -15,8 +17,11 @@ import androidx.annotation.Nullable;
 public class Basedrum extends View {
 
     private Bitmap baseDrumImage;
-    private MediaPlayer baseDrumSound;
+    //private MediaPlayer baseDrumSound;
     private ScaleGestureDetector mScaleDetector;
+
+    public SoundPool soundPool;
+    private int sound;
 
     public Basedrum(Context context) {
         super(context);
@@ -26,9 +31,18 @@ public class Basedrum extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         baseDrumImage = BitmapFactory.decodeResource(getResources(), R.raw.basedrumimage);
-        baseDrumSound = MediaPlayer.create(context, R.raw.bassdrumsound);
-        baseDrumSound.setLooping(false);
+        //baseDrumSound = MediaPlayer.create(context, R.raw.bassdrumsound);
+        //baseDrumSound.setLooping(false);
 
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+        sound = soundPool.load(context, R.raw.bassdrumsound, 1);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -51,7 +65,7 @@ public class Basedrum extends View {
         return true;
     }
     private void playMediaPlayer(){
-            baseDrumSound.start();
+        soundPool.play(sound, 1, 1, 0, 0, 1);
     }
 
     @Override

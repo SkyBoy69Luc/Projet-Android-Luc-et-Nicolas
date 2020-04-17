@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -15,8 +17,11 @@ import androidx.annotation.Nullable;
 public class Hihat extends View {
 
     private Bitmap hihatImage;
-    private MediaPlayer hihatSound;
+    //private MediaPlayer hihatSound;
     private ScaleGestureDetector mScaleDetector;
+
+    public SoundPool soundPool;
+    private int sound;
 
     public Hihat(Context context) {
         super(context);
@@ -26,9 +31,18 @@ public class Hihat extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         hihatImage = BitmapFactory.decodeResource(getResources(), R.raw.hihatimage);
-        hihatSound = MediaPlayer.create(context, R.raw.hihatsound1);
-        hihatSound.setLooping(false);
+        //hihatSound = MediaPlayer.create(context, R.raw.hihatsound1);
+        //hihatSound.setLooping(false);
 
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+        sound = soundPool.load(context, R.raw.hihatsound1, 1);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -51,9 +65,8 @@ public class Hihat extends View {
         return true;
     }
     private void playMediaPlayer(){
-        hihatSound.start();
+        soundPool.play(sound, 1, 1, 0, 0, 1);
     }
-
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);

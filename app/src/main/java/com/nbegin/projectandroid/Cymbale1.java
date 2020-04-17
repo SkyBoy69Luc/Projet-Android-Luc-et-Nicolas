@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -17,9 +19,12 @@ import androidx.fragment.app.DialogFragment;
 public class Cymbale1 extends View {
 
     private Bitmap cymbale1Image;
-    private MediaPlayer cymbale1Sound;
-    private MediaPlayer cymbale2Sound;
+    //private MediaPlayer cymbale1Sound;
+    //private MediaPlayer cymbale2Sound;
     private ScaleGestureDetector mScaleDetector;
+
+    public SoundPool soundPool;
+    private int sound;
 
     public Cymbale1(Context context) {
         super(context);
@@ -29,10 +34,20 @@ public class Cymbale1 extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
-        cymbale1Sound = MediaPlayer.create(context, R.raw.cymbalsound1);
-        cymbale1Sound.setLooping(false);
-        cymbale2Sound = MediaPlayer.create(context, R.raw.floortom1);
-        cymbale2Sound.setLooping(false);
+        //cymbale1Sound = MediaPlayer.create(context, R.raw.cymbalsound1);
+        //cymbale1Sound.setLooping(false);
+        //cymbale2Sound = MediaPlayer.create(context, R.raw.floortom1);
+        //cymbale2Sound.setLooping(false);
+
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+        sound = soundPool.load(context, R.raw.cymbalsound1, 1);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -51,15 +66,14 @@ public class Cymbale1 extends View {
                 playMediaPlayer();
                 break;
             case MotionEvent.ACTION_MOVE:
-                cymbale2Sound.start();
+                //cymbale2Sound.start();
                 break;
         }
         return true;
     }
     private void playMediaPlayer(){
-        cymbale1Sound.start();
+        soundPool.play(sound, 1, 1, 0, 0, 1);
     }
-
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);

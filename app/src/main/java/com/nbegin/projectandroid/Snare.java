@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -15,8 +17,11 @@ import androidx.annotation.Nullable;
 public class Snare extends View {
 
     private Bitmap snareImage;
-    private MediaPlayer snareSound;
+    //private MediaPlayer snareSound;
     private ScaleGestureDetector mScaleDetector;
+
+    public SoundPool soundPool;
+    private int sound;
 
     public Snare(Context context) {
         super(context);
@@ -26,9 +31,18 @@ public class Snare extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         snareImage = BitmapFactory.decodeResource(getResources(), R.raw.snareimage);
-        snareSound = MediaPlayer.create(context, R.raw.snaresound);
-        snareSound.setLooping(false);
+        //snareSound = MediaPlayer.create(context, R.raw.snaresound);
+        //snareSound.setLooping(false);
 
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+        sound = soundPool.load(context, R.raw.snaresound, 1);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -50,8 +64,7 @@ public class Snare extends View {
         }
         return true;
     }
-    private void playMediaPlayer(){ snareSound.start(); }
-
+    private void playMediaPlayer(){  soundPool.play(sound, 1, 1, 0, 0, 1);}
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
