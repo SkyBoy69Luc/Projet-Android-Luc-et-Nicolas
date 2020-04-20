@@ -19,8 +19,6 @@ import androidx.fragment.app.DialogFragment;
 public class Cymbale1 extends View {
 
     private Bitmap cymbale1Image;
-    //private MediaPlayer cymbale1Sound;
-    //private MediaPlayer cymbale2Sound;
     private ScaleGestureDetector mScaleDetector;
 
     public SoundPool soundPool;
@@ -34,15 +32,18 @@ public class Cymbale1 extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
-        //cymbale1Sound = MediaPlayer.create(context, R.raw.cymbalsound1);
-        //cymbale1Sound.setLooping(false);
-        //cymbale2Sound = MediaPlayer.create(context, R.raw.floortom1);
-        //cymbale2Sound.setLooping(false);
+
+        InitialiserSound(context);
+
+    }
+
+    private void InitialiserSound(Context context) {
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .build();
+
         soundPool = new SoundPool.Builder()
                 .setMaxStreams(6)
                 .setAudioAttributes(audioAttributes)
