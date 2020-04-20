@@ -71,9 +71,11 @@ public class Cymbale1 extends View {
         }
         return true;
     }
+
     private void playMediaPlayer(){
         soundPool.play(sound, 1, 1, 0, 0, 1);
     }
+
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
@@ -85,6 +87,7 @@ public class Cymbale1 extends View {
         canvas.scale(0.2f,0.2f);
         canvas.drawBitmap(cymbale1Image, 0, 0, null);
         canvas.restore();
+
     }
 
     @Override

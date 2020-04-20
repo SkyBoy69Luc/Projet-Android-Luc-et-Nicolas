@@ -82,6 +82,7 @@ public class Tom1 extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        //a finaliser
         setMeasuredDimension(300, 300);
     }
 
