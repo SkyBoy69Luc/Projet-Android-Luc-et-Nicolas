@@ -1,20 +1,20 @@
 package com.nbegin.projectandroid;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.AudioAttributes;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.widget.Toast;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 public class Cymbale1 extends View {
 
@@ -24,6 +24,8 @@ public class Cymbale1 extends View {
     public SoundPool soundPool;
     private int sound;
 
+    private Animation anim;
+
     public Cymbale1(Context context) {
         super(context);
     }
@@ -32,6 +34,17 @@ public class Cymbale1 extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
+
+        float startScale = 0.9f;
+        float endScale = 1f;
+
+        anim = new ScaleAnimation(
+                startScale, endScale, // Start and end values for the X axis scaling
+                startScale, endScale, // Start and end values for the Y axis scaling
+                Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
+                Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
+        anim.setFillAfter(true); // Needed to keep the result of the animation
+        anim.setDuration(300);
 
         InitialiserSound(context);
 
@@ -49,6 +62,7 @@ public class Cymbale1 extends View {
                 .setAudioAttributes(audioAttributes)
                 .build();
         sound = soundPool.load(context, R.raw.cymbalsound1, 1);
+
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -64,6 +78,7 @@ public class Cymbale1 extends View {
         mScaleDetector.onTouchEvent(event);
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                playAnimation();
                 playMediaPlayer();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -71,6 +86,10 @@ public class Cymbale1 extends View {
                 break;
         }
         return true;
+    }
+
+    private void playAnimation() {
+        this.startAnimation(anim);
     }
 
     private void playMediaPlayer(){
