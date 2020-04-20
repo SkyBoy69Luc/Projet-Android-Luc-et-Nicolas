@@ -1,6 +1,5 @@
 package com.nbegin.projectandroid;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,10 +20,11 @@ public class Cymbale1 extends View {
     private Bitmap cymbale1Image;
     private ScaleGestureDetector mScaleDetector;
 
-    public SoundPool soundPool;
+    private SoundPool soundPool;
     private int sound;
 
     private Animation anim;
+    private int animDuration;
 
     public Cymbale1(Context context) {
         super(context);
@@ -35,6 +35,12 @@ public class Cymbale1 extends View {
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
 
+        InitialiserAnimation();
+        InitialiserSound(context);
+    }
+
+    private void InitialiserAnimation() {
+        animDuration = 300;
         float startScale = 0.9f;
         float endScale = 1f;
 
@@ -44,14 +50,10 @@ public class Cymbale1 extends View {
                 Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
                 Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
         anim.setFillAfter(true); // Needed to keep the result of the animation
-        anim.setDuration(300);
-
-        InitialiserSound(context);
-
+        anim.setDuration(animDuration);
     }
 
     private void InitialiserSound(Context context) {
-
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -107,7 +109,6 @@ public class Cymbale1 extends View {
         canvas.scale(0.2f,0.2f);
         canvas.drawBitmap(cymbale1Image, 0, 0, null);
         canvas.restore();
-
     }
 
     @Override
