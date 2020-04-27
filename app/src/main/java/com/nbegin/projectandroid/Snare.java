@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.AudioAttributes;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -17,7 +16,7 @@ import androidx.annotation.Nullable;
 public class Snare extends View {
 
     private Bitmap snareImage;
-    //private MediaPlayer snareSound;
+
     private ScaleGestureDetector mScaleDetector;
 
     public SoundPool soundPool;
@@ -31,9 +30,7 @@ public class Snare extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         snareImage = BitmapFactory.decodeResource(getResources(), R.raw.snareimage);
-        //snareSound = MediaPlayer.create(context, R.raw.snaresound);
-        //snareSound.setLooping(false);
-
+        
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
