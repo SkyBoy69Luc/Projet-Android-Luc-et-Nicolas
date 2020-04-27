@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         super.onOptionsItemSelected(item);
         if(item.getItemId()== R.id.menu_logout){
-            Toast.makeText(this, "Log out",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Log out",Toast.LENGTH_SHORT).show();
             //firebaseAuth.signOut();
             sendUserToSingUpOrLigInActivity();
             return true;
         }
         if(item.getItemId()== R.id.menu_exit){
-            Toast.makeText(this, "Exit",Toast.LENGTH_SHORT).show();
-            //exit
+            this.finish();
+            System.exit(0);
 
         }
         return false;

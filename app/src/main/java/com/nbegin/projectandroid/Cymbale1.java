@@ -23,6 +23,9 @@ public class Cymbale1 extends View {
     private SoundPool soundPool;
     private int sound;
 
+//    private SoundPool soundPool2;
+//    private int sound2;
+
     private Animation anim;
     private int animDuration;
 
@@ -65,6 +68,17 @@ public class Cymbale1 extends View {
                 .build();
         sound = soundPool.load(context, R.raw.cymbalsound1, 1);
 
+
+//        AudioAttributes audioAttributes2 = new AudioAttributes.Builder()
+//                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+//                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+//                .build();
+//
+//        soundPool2 = new SoundPool.Builder()
+//                .setMaxStreams(6)
+//                .setAudioAttributes(audioAttributes2)
+//                .build();
+//        sound2 = soundPool2.load(context, R.raw.floortom1, 1);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -84,7 +98,7 @@ public class Cymbale1 extends View {
                 playMediaPlayer();
                 break;
             case MotionEvent.ACTION_MOVE:
-                //cymbale2Sound.start();
+                //soundPool.play(sound, 1, 1, 0, 0, 1);
                 break;
         }
         return true;
