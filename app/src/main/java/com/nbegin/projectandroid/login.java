@@ -32,4 +32,5 @@ public class login extends AppCompatActivity {
         Intent sendUserToSingUpOrLigInIntet = new Intent(this, activityToGoTo);
         startActivity(sendUserToSingUpOrLigInIntet);
     }
+    //TODO sprint 2 haha
 }
