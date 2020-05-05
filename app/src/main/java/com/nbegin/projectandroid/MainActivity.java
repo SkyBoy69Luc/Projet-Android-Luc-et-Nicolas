@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
     Basedrum basedrum;
     Cymbale1 cymbale;
@@ -21,15 +23,12 @@ public class MainActivity extends AppCompatActivity {
     Tom1 tom1;
     Tom2 tom2;
 
-    //FirebaseAuth firebaseAuth;
-    EditText emailEdit;
-    EditText passwordEdit;
-
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         InitialiseClass();
 
     }
@@ -53,15 +52,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         super.onOptionsItemSelected(item);
         if(item.getItemId()== R.id.menu_logout){
-            //Toast.makeText(this, "Log out",Toast.LENGTH_SHORT).show();
-            //firebaseAuth.signOut();
+            firebaseAuth.signOut();
             sendUserToSingUpOrLigInActivity();
             return true;
         }
         if(item.getItemId()== R.id.menu_exit){
-            this.finish();
-            System.exit(0);
-
+            firebaseAuth.signOut();
+            finishAffinity();
         }
         return false;
     }
