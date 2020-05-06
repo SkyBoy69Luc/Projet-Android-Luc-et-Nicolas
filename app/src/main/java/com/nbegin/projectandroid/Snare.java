@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.AudioAttributes;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -17,11 +16,12 @@ import androidx.annotation.Nullable;
 public class Snare extends View {
 
     private Bitmap snareImage;
-    //private MediaPlayer snareSound;
     private ScaleGestureDetector mScaleDetector;
-
-    public SoundPool soundPool;
-    private int sound;
+    private SoundPool snareSoundPool;
+    private int snareSoundID;
+    private SoundPool snareSoundPool2;
+    private int snareSound2ID;
+    private boolean fingerMove;
 
     public Snare(Context context) {
         super(context);
@@ -29,20 +29,33 @@ public class Snare extends View {
 
     public Snare(Context context, @Nullable AttributeSet attrs){
         super(context);
+        
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         snareImage = BitmapFactory.decodeResource(getResources(), R.raw.snareimage);
-        //snareSound = MediaPlayer.create(context, R.raw.snaresound);
-        //snareSound.setLooping(false);
 
+        fingerMove = false;
+        
+        InitialiserSound(context);
+    }
+
+    private void InitialiserSound(Context context) {
+        
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .build();
-        soundPool = new SoundPool.Builder()
+
+        snareSoundPool = new SoundPool.Builder()
                 .setMaxStreams(6)
                 .setAudioAttributes(audioAttributes)
                 .build();
-        sound = soundPool.load(context, R.raw.snaresound, 1);
+        snareSoundID = snareSoundPool.load(context, R.raw.snaresound, 1);
+        
+        snareSoundPool2 = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+        snareSound2ID = snareSoundPool2.load(context, R.raw.snare2sound, 1);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -52,19 +65,30 @@ public class Snare extends View {
             return true;
         }
     }
+    
     @Override
     public boolean onTouchEvent(MotionEvent event){
         mScaleDetector.onTouchEvent(event);
-        switch (event.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                playMediaPlayer();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
+                if (fingerMove != true) {
+                    playSnareSound(snareSoundPool,snareSoundID, 1);
+                }else{
+                    fingerMove = false;
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
+                if (fingerMove != true) {
+                    fingerMove = true;
+                    playSnareSound(snareSoundPool2, snareSound2ID, 0.8f);
+                }
                 break;
         }
         return true;
     }
-    private void playMediaPlayer(){  soundPool.play(sound, 1, 1, 0, 0, 1);}
+    
+    private void playSnareSound(SoundPool soundPool, int soundID, float levelVolume){ soundPool.play(soundID, levelVolume, levelVolume, 0, 0, 1);}
+
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);

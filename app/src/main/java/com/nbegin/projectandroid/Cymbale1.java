@@ -35,6 +35,7 @@ public class Cymbale1 extends View {
 
     public Cymbale1(Context context, @Nullable AttributeSet attrs){
         super(context);
+
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
 
@@ -67,18 +68,6 @@ public class Cymbale1 extends View {
                 .setAudioAttributes(audioAttributes)
                 .build();
         sound = soundPool.load(context, R.raw.cymbalsound1, 1);
-
-
-//        AudioAttributes audioAttributes2 = new AudioAttributes.Builder()
-//                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-//                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-//                .build();
-//
-//        soundPool2 = new SoundPool.Builder()
-//                .setMaxStreams(6)
-//                .setAudioAttributes(audioAttributes2)
-//                .build();
-//        sound2 = soundPool2.load(context, R.raw.floortom1, 1);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{

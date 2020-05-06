@@ -29,10 +29,14 @@ public class Tom1 extends View {
 
     public Tom1(Context context, @Nullable AttributeSet attrs){
         super(context);
+
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         tom1Image = BitmapFactory.decodeResource(getResources(), R.raw.tomimage);
-        //tom1Sound = MediaPlayer.create(context, R.raw.tomsound1);
-        //tom1Sound.setLooping(false);
+
+        InitialiserSound(context);
+    }
+
+    private void InitialiserSound(Context context) {
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -52,6 +56,7 @@ public class Tom1 extends View {
             return true;
         }
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         mScaleDetector.onTouchEvent(event);
@@ -64,9 +69,11 @@ public class Tom1 extends View {
         }
         return true;
     }
+
     private void playMediaPlayer(){
         soundPool.play(sound, 1, 1, 0, 0, 1);
     }
+
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
@@ -82,7 +89,6 @@ public class Tom1 extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        //a finaliser
         setMeasuredDimension(300, 300);
     }
 

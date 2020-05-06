@@ -31,8 +31,11 @@ public class Basedrum extends View {
         super(context);
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         baseDrumImage = BitmapFactory.decodeResource(getResources(), R.raw.basedrumimage);
-        //baseDrumSound = MediaPlayer.create(context, R.raw.bassdrumsound);
-        //baseDrumSound.setLooping(false);
+
+        InitialiserSound(context);
+    }
+
+    private void InitialiserSound(Context context) {
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -52,6 +55,7 @@ public class Basedrum extends View {
             return true;
         }
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         mScaleDetector.onTouchEvent(event);
@@ -64,6 +68,7 @@ public class Basedrum extends View {
         }
         return true;
     }
+    
     private void playMediaPlayer(){
         soundPool.play(sound, 1, 1, 0, 0, 1);
     }

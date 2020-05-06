@@ -29,10 +29,14 @@ public class Hihat extends View {
 
     public Hihat(Context context, @Nullable AttributeSet attrs){
         super(context);
+
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         hihatImage = BitmapFactory.decodeResource(getResources(), R.raw.hihatimage);
-        //hihatSound = MediaPlayer.create(context, R.raw.hihatsound1);
-        //hihatSound.setLooping(false);
+
+        InitialiserSound(context);
+    }
+
+    private void InitialiserSound(Context context) {
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -67,6 +71,7 @@ public class Hihat extends View {
     private void playMediaPlayer(){
         soundPool.play(sound, 1, 1, 0, 0, 1);
     }
+
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
