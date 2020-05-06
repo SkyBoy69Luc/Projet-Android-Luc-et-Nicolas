@@ -19,13 +19,8 @@ public class Cymbale1 extends View {
 
     private Bitmap cymbale1Image;
     private ScaleGestureDetector mScaleDetector;
-
     private SoundPool soundPool;
     private int sound;
-
-//    private SoundPool soundPool2;
-//    private int sound2;
-
     private Animation anim;
     private int animDuration;
 
