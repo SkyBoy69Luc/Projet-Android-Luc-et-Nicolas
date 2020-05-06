@@ -17,9 +17,7 @@ import androidx.annotation.Nullable;
 public class Basedrum extends View {
 
     private Bitmap baseDrumImage;
-    //private MediaPlayer baseDrumSound;
     private ScaleGestureDetector mScaleDetector;
-
     public SoundPool soundPool;
     private int sound;
 

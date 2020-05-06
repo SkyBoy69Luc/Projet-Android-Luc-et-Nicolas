@@ -17,9 +17,7 @@ import androidx.annotation.Nullable;
 public class Tom1 extends View {
 
     private Bitmap tom1Image;
-    //private MediaPlayer tom1Sound;
     private ScaleGestureDetector mScaleDetector;
-
     public SoundPool soundPool;
     private int sound;
 
