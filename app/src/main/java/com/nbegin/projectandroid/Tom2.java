@@ -29,10 +29,14 @@ public class Tom2 extends View {
 
     public Tom2(Context context, @Nullable AttributeSet attrs){
         super(context);
+
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         tom2Image = BitmapFactory.decodeResource(getResources(), R.raw.tomimage);
-        //tom2Sound = MediaPlayer.create(context, R.raw.tomsound2);
-        //tom2Sound.setLooping(false);
+
+        InitialiserSound(context);
+    }
+
+    private void InitialiserSound(Context context) {
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -43,7 +47,6 @@ public class Tom2 extends View {
                 .setAudioAttributes(audioAttributes)
                 .build();
         sound = soundPool.load(context, R.raw.tomsound1, 1);
-
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
@@ -53,6 +56,7 @@ public class Tom2 extends View {
             return true;
         }
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         mScaleDetector.onTouchEvent(event);
@@ -65,6 +69,7 @@ public class Tom2 extends View {
         }
         return true;
     }
+
     private void playMediaPlayer(){
         soundPool.play(sound, 1, 1, 0, 0, 1);
     }

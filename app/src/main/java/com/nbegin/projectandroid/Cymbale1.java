@@ -35,6 +35,7 @@ public class Cymbale1 extends View {
 
     public Cymbale1(Context context, @Nullable AttributeSet attrs){
         super(context);
+
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
 

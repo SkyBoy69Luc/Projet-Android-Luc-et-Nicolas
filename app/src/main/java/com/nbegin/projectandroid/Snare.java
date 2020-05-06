@@ -16,15 +16,11 @@ import androidx.annotation.Nullable;
 public class Snare extends View {
 
     private Bitmap snareImage;
-
     private ScaleGestureDetector mScaleDetector;
-
-    public SoundPool snareSoundPool;
+    private SoundPool snareSoundPool;
     private int snareSoundID;
-
-    public SoundPool snareSoundPool2;
+    private SoundPool snareSoundPool2;
     private int snareSound2ID;
-
     private boolean fingerMove;
 
     public Snare(Context context) {
@@ -61,7 +57,6 @@ public class Snare extends View {
                 .build();
         snareSound2ID = snareSoundPool2.load(context, R.raw.snare2sound, 1);
     }
-    
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
         @Override
