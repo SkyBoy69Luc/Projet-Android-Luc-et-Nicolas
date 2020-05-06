@@ -17,9 +17,7 @@ import androidx.annotation.Nullable;
 public class Hihat extends View {
 
     private Bitmap hihatImage;
-    //private MediaPlayer hihatSound;
     private ScaleGestureDetector mScaleDetector;
-
     public SoundPool soundPool;
     private int sound;
 
