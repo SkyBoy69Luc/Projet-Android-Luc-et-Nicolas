@@ -13,20 +13,20 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    Basedrum basedrum;
-    Cymbale1 cymbale;
-    Hihat hihat;
-    Snare snare;
-    Tom1 tom1;
-    Tom2 tom2;
+    private Basedrum basedrum;
+    private Cymbale1 cymbale;
+    private Hihat hihat;
+    private Snare snare;
+    private Tom1 tom1;
+    private Tom2 tom2;
     private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         firebaseAuth = FirebaseAuth.getInstance();
         initialiseClass();
-
     }
 
     private void initialiseClass() {
@@ -49,9 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         if(item.getItemId()== R.id.menu_logout){
             callDisconnectedMessage();
-
-                return true;
-
+            return true;
         }
         if(item.getItemId()== R.id.menu_exit){
             firebaseAuth.signOut();
@@ -67,15 +65,20 @@ public class MainActivity extends AppCompatActivity {
         dialogBtnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.signOut();
                 dialog.dismiss();
-                sendUserToSingUp();
+                returnToSingUp();
             }
         });
         dialog.show();
     }
+
     private void sendUserToSingUp(){
         Intent sendUserToSingUpOrLigInIntet = new Intent(this, Login.class);
         startActivity(sendUserToSingUpOrLigInIntet);
+    }
+
+    private void returnToSingUp() {
+        firebaseAuth.signOut();
+        sendUserToSingUp();
     }
 }
