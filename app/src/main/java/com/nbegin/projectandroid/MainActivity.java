@@ -2,16 +2,13 @@ package com.nbegin.projectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -22,18 +19,17 @@ public class MainActivity extends AppCompatActivity {
     Snare snare;
     Tom1 tom1;
     Tom2 tom2;
-
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         firebaseAuth = FirebaseAuth.getInstance();
-        InitialiseClass();
+        initialiseClass();
 
     }
 
-    private void InitialiseClass() {
+    private void initialiseClass() {
         basedrum = findViewById(R.id.bassedrum1);
         cymbale = findViewById(R.id.cymbale1);
         hihat = findViewById(R.id.hihat);
@@ -52,9 +48,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         super.onOptionsItemSelected(item);
         if(item.getItemId()== R.id.menu_logout){
-            firebaseAuth.signOut();
-            sendUserToSingUpOrLigInActivity();
-            return true;
+            callDisconnectedMessage();
+
+                return true;
+
         }
         if(item.getItemId()== R.id.menu_exit){
             firebaseAuth.signOut();
@@ -62,8 +59,23 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void sendUserToSingUpOrLigInActivity(){
-        Intent sendUserToSingUpOrLigInIntet = new Intent(this, login.class);
+    private void callDisconnectedMessage(){
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.msg_disconnected);
+        Button dialogBtnOk = dialog.findViewById(R.id.btn_ok);
+
+        dialogBtnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseAuth.signOut();
+                dialog.dismiss();
+                sendUserToSingUp();
+            }
+        });
+        dialog.show();
+    }
+    private void sendUserToSingUp(){
+        Intent sendUserToSingUpOrLigInIntet = new Intent(this, Login.class);
         startActivity(sendUserToSingUpOrLigInIntet);
     }
 }

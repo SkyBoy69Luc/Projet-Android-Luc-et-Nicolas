@@ -35,10 +35,10 @@ public class Snare extends View {
 
         fingerMove = false;
         
-        InitialiserSound(context);
+        initialiserSound(context);
     }
 
-    private void InitialiserSound(Context context) {
+    private void initialiserSound(Context context) {
         
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)

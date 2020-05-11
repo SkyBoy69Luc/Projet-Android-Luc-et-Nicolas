@@ -31,10 +31,10 @@ public class Tom1 extends View {
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         tom1Image = BitmapFactory.decodeResource(getResources(), R.raw.tomimage);
 
-        InitialiserSound(context);
+        initialiserSound(context);
     }
 
-    private void InitialiserSound(Context context) {
+    private void initialiserSound(Context context) {
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)

@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class login extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     EditText emailEdit;
     EditText passwordEdit;
@@ -34,11 +34,11 @@ public class login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                Login();
             }
         });
     }
-    private void login(){
+    private void Login(){
         String email = emailEdit.getText().toString();
         String password = passwordEdit.getText().toString();
         firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

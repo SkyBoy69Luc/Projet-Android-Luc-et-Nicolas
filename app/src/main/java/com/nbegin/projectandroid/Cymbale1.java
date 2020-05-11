@@ -34,11 +34,11 @@ public class Cymbale1 extends View {
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         cymbale1Image = BitmapFactory.decodeResource(getResources(), R.raw.cymbaleimage1);
 
-        InitialiserAnimation();
-        InitialiserSound(context);
+        initialiserAnimation();
+        initialiserSound(context);
     }
 
-    private void InitialiserAnimation() {
+    private void initialiserAnimation() {
         animDuration = 300;
         float startScale = 0.9f;
         float endScale = 1f;
@@ -52,7 +52,7 @@ public class Cymbale1 extends View {
         anim.setDuration(animDuration);
     }
 
-    private void InitialiserSound(Context context) {
+    private void initialiserSound(Context context) {
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)

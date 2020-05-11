@@ -31,10 +31,10 @@ public class Hihat extends View {
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         hihatImage = BitmapFactory.decodeResource(getResources(), R.raw.hihatimage);
 
-        InitialiserSound(context);
+        initialiserSound(context);
     }
 
-    private void InitialiserSound(Context context) {
+    private void initialiserSound(Context context) {
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
