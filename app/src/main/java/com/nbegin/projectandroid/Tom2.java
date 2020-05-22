@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 
 import androidx.annotation.Nullable;
 
@@ -20,7 +22,8 @@ public class Tom2 extends View {
     private ScaleGestureDetector mScaleDetector;
     public SoundPool soundPool;
     private int sound;
-
+    private Animation anim;
+    private int animDuration;
     public Tom2(Context context) {
         super(context);
     }
@@ -30,10 +33,25 @@ public class Tom2 extends View {
 
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         tom2Image = BitmapFactory.decodeResource(getResources(), R.raw.tomimage);
-
+        initialiserAnimation();
         initialiserSound(context);
     }
+    private void initialiserAnimation() {
+        animDuration = 300;
+        float startScale = 0.9f;
+        float endScale = 1f;
 
+        anim = new ScaleAnimation(
+                startScale, endScale, // Start and end values for the X axis scaling
+                startScale, endScale, // Start and end values for the Y axis scaling
+                Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
+                Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
+        anim.setFillAfter(true); // Needed to keep the result of the animation
+        anim.setDuration(animDuration);
+    }
+    private void playAnimation() {
+        this.startAnimation(anim);
+    }
     private void initialiserSound(Context context) {
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -61,6 +79,7 @@ public class Tom2 extends View {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 playMediaPlayer();
+                playAnimation();
                 break;
             case MotionEvent.ACTION_MOVE:
                 break;

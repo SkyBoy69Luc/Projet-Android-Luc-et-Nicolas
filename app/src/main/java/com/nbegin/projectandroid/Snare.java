@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 
 import androidx.annotation.Nullable;
 
@@ -22,7 +24,8 @@ public class Snare extends View {
     private SoundPool snareSoundPool2;
     private int snareSound2ID;
     private boolean fingerMove;
-
+    private Animation anim;
+    private int animDuration;
     public Snare(Context context) {
         super(context);
     }
@@ -34,10 +37,25 @@ public class Snare extends View {
         snareImage = BitmapFactory.decodeResource(getResources(), R.raw.snareimage);
 
         fingerMove = false;
-        
+        initialiserAnimation();
         initialiserSound(context);
     }
+    private void initialiserAnimation() {
+        animDuration = 300;
+        float startScale = 0.9f;
+        float endScale = 1f;
 
+        anim = new ScaleAnimation(
+                startScale, endScale, // Start and end values for the X axis scaling
+                startScale, endScale, // Start and end values for the Y axis scaling
+                Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
+                Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
+        anim.setFillAfter(true); // Needed to keep the result of the animation
+        anim.setDuration(animDuration);
+    }
+    private void playAnimation() {
+        this.startAnimation(anim);
+    }
     private void initialiserSound(Context context) {
         
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -69,21 +87,32 @@ public class Snare extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event){
         mScaleDetector.onTouchEvent(event);
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_UP:
-                if (fingerMove != true) {
-                    playSnareSound(snareSoundPool,snareSoundID, 1);
-                }else{
-                    fingerMove = false;
-                }
+
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                playSnareSound(snareSoundPool,snareSoundID, 1);
+                playAnimation();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (fingerMove != true) {
-                    fingerMove = true;
-                    playSnareSound(snareSoundPool2, snareSound2ID, 0.8f);
-                }
                 break;
         }
+
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_UP:
+//                if (fingerMove != true) {
+//                    playSnareSound(snareSoundPool,snareSoundID, 1);
+//                    playAnimation();
+//                }else{
+//                    //fingerMove = false;
+//                }
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                if (fingerMove != true) {
+//                    fingerMove = true;
+//                    playSnareSound(snareSoundPool2, snareSound2ID, 0.8f);
+//                }
+//                break;
+//        }
         return true;
     }
     
